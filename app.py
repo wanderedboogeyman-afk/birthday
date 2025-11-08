@@ -1,16 +1,16 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Needed for flashing messages
+application = Flask(__name__)
+application.secret_key = 'your_secret_key'
 
 USERNAME = "reetika"
 PASSWORD = "gadhi"
 
-@app.route('/')
+@application.route('/')
 def login():
     return render_template('login.html')
 
-@app.route('/login', methods=['POST'])
+@application.route('/login', methods=['POST'])
 def do_login():
     username = request.form['username']
     password = request.form['password']
@@ -20,9 +20,6 @@ def do_login():
         flash("Invalid credentials. Please try again.")
         return redirect(url_for('login'))
 
-@app.route('/home')
+@application.route('/home')
 def home():
     return render_template('index.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
