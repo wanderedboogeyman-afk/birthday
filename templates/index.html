@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday!</title>
+    <audio autoplay loop hidden>
+        <source src="{{ url_for('static', filename='song.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='birthday-hero.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 2.8em;
+            text-shadow: 0 0 10px #ff69b4;
+            margin-bottom: 20px;
+            animation: sparkle 4s infinite;
+            position: relative;
+        }
+
+        h1::after {
+            content: "✨";
+            position: absolute;
+            right: -40px;
+            top: 0;
+            font-size: 1.5em;
+            animation: twinkle 1.5s infinite;
+        }
+
+        @keyframes sparkle {
+            0%   { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4; }
+            50%  { text-shadow: 0 0 20px #ff85c1, 0 0 30px #ff85c1; }
+            100% { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff69b4; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%      { opacity: 0.5; transform: scale(1.3); }
+        }
+
+        #animation {
+            width: 300px;
+            height: 300px;
+            margin-bottom: 30px;
+        }
+
+        .letter-box {
+            width: 120px;
+            height: 80px;
+            background: #ff69b4;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #ff69b4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .letter-box:hover {
+            transform: scale(1.1);
+        }
+
+        .letter-box::after {
+            content: "📩";
+            font-size: 2em;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(5px);
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #222;
+            color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 0 20px #ff69b4;
+        }
+
+        .close-btn {
+            margin-top: 20px;
+            background: #ff69b4;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            background: #ff85c1;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Happy Birthday, Reetika! 🎂</h1>
+    <div id="animation"></div>
+
+    <div class="letter-box" onclick="openModal()"></div>
+
+    <div class="modal" id="birthdayModal">
+        <div class="modal-content">
+            <h2>my baby Reetika,</h2>
+            <p>
+                my lovely reetika.<br>
+                this year you will turn 20, and i know from past few years the road of
+                life was lil bumpy for you, but you have crossed it like a warrior, and  
+                i am sure this year, it will bring you joy and success.<br>
+                and i am very very proud of you for being what you are and i never wanna
+                lose you, i admire your every move, i love to see you smiling, and  
+                laughing always. <strong>but your laugh is like a engine</strong><br>
+                so my lovely engine....! ops sorry.....<br>
+                my lovely ritu i love you and Wishing you a day filled with love,
+                laughter, and unforgettable memories.<br>
+                happy birthday love.
+            </p>
+            <button class="close-btn" onclick="blushAttack()">Okay okay, I'm blushing 😳</button>
+            <button class="close-btn" onclick="cheeseOverload()">You’re too cheesy 🧀</button>
+            <button class="close-btn" onclick="sadDrama()">Stop it, you romantic fool 💘</button>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='animation.js') }}"></script>
+    <script>
+        function openModal() {
+            document.getElementById('birthdayModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('birthdayModal').style.display = 'none';
+        }
+
+        function blushAttack() {
+            const modal = document.getElementById('birthdayModal');
+            modal.style.backgroundColor = '#ffb6c1';
+            modal.querySelector('.modal-content').innerHTML = `
+                <h2>💗 Blush Overload 💗</h2>
+                <p>Blush levels critical! Deploying emergency cuteness protocol…</p>
+                <button class="close-btn" onclick="resetModal()">Make it stop 😳</button>
+            `;
+        }
+
+        function cheeseOverload() {
+            const modal = document.getElementById('birthdayModal');
+            modal.style.backgroundColor = '#fff8dc';
+            modal.querySelector('.modal-content').innerHTML = `
+                <h2>🧀 Cheese Alert! 🧀</h2>
+                <p>Warning: Excessive cheesiness detected. Mozzarella meltdown in 3… 2… 1…</p>
+                <button class="close-btn" onclick="resetModal()">Okay fine, I love it 😅</button>
+            `;
+        }
+        function sadDrama() {
+             const modal = document.getElementById('birthdayModal');
+             modal.style.backgroundColor = '#1a1a1a';
+            modal.querySelector('.modal-content').innerHTML = `
+               <h2 style="font-size: 3em;">🥺</h2>
+               <p style="font-style: italic;">
+             You broke my poetic heart… 💔<br>
+             I’ll be under my blanket listening to sad songs now.
+             </p>
+             <button class="close-btn" onclick="resetModal()">Okay okay, come back here 😅</button>
+    `;
+}
+
+        function resetModal() {
+            const modal = document.getElementById('birthdayModal');
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+            modal.querySelector('.modal-content').innerHTML = `
+                <h2>my baby Reetika,</h2>
+                <p>
+                    my lovely reetika.<br>
+                    this year you will turn 20, and i know from past few years the road of
+                    life was lil bumpy for you, but you have crossed it like a warrior, and  
+                    i am sure this year, it will bring you joy and success.<br>
+                    and i am very very proud of you for being what you are and i never wanna
+                    lose you, i admire your every move, i love to see you smiling, and  
+                    laughing always. <strong>but your laugh is like a engine</strong><br>
+                    so my lovely engine....! ops sorry.....<br>
+                    my lovely ritu i love you and Wishing you a day filled with love,
+                    laughter, and unforgettable memories.<br>
+                    happy birthday love.
+                </p>
+                <button class="close-btn" onclick="blushAttack()">Okay okay, I'm blushing 😳</button>
+                <button class="close-btn" onclick="cheeseOverload()">You’re too cheesy 🧀</button>
+                <button class="close-btn" onclick="sadDrama()">Stop it, you romantic fool 💘</button>
+
+            `;
+        }
+
+        const bgMusic = document.querySelector("audio");
+        bgMusic.volume = 0.5;
+    </script>
+</body>
+</html>
